@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0n2ywysiy68s"]
+
+[ext_resource type="PackedScene" uid="uid://ct4yk73x8n57t" path="res://hud.tscn" id="1_ipfg8"]
+[ext_resource type="Script" path="res://main.gd" id="1_t7rx1"]
+[ext_resource type="PackedScene" uid="uid://sggutdetx6rx" path="res://corn.tscn" id="2_kl343"]
+[ext_resource type="PackedScene" uid="uid://mjrx1vwqi6jh" path="res://player.tscn" id="4_ik8wa"]
+[ext_resource type="PackedScene" uid="uid://bcjvhyokx8wbp" path="res://arrow.tscn" id="5_vssdo"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_t7rx1")
+corn_scene = ExtResource("2_kl343")
+arrow_scene = ExtResource("5_vssdo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -253.0
+offset_top = -153.0
+offset_right = 1620.0
+offset_bottom = 895.0
+color = Color(0.239216, 0.513726, 0.929412, 1)
+
+[node name="Player" parent="." instance=ExtResource("4_ik8wa")]
+position = Vector2(663, 211)
+
+[node name="HUD" parent="." instance=ExtResource("1_ipfg8")]
+
+[node name="Corn" parent="." instance=ExtResource("2_kl343")]
+position = Vector2(-1284, 65)
+
+[node name="CornTimer" type="Timer" parent="."]
+wait_time = 0.273
+
+[node name="StartPosition1" type="Marker2D" parent="."]
+position = Vector2(656, 312)
+
+[node name="ArrowTimer" type="Timer" parent="."]
+
+[node name="arrow" parent="." instance=ExtResource("5_vssdo")]
+
+[connection signal="timeout" from="CornTimer" to="." method="_on_corn_timer_timeout"]
+[connection signal="timeout" from="ArrowTimer" to="." method="_on_arrow_timer_timeout"]

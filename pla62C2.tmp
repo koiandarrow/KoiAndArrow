@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://mjrx1vwqi6jh"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_2g4yv"]
+[ext_resource type="Texture2D" uid="uid://bx5wsumow0sg8" path="res://art/koi.png" id="1_1743m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ew87w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1743m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hhxdo"]
+radius = 42.8019
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ev8ee"]
+
+[node name="Player" type="CharacterBody2D"]
+visible = false
+motion_mode = 1
+script = ExtResource("1_2g4yv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_ew87w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-11, 5)
+shape = SubResource("CircleShape2D_hhxdo")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ev8ee")

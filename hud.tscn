@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct4yk73x8n57t"]
+
+[ext_resource type="PackedScene" uid="uid://d2ijveyjel7ig" path="res://joystick.tscn" id="1_1mfcc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_enlbq"]
+size = Vector2(1073.5, 579)
+
+[sub_resource type="Curve2D" id="Curve2D_m7yyr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -11, -1, 0, 0, 0, 0, 1148, 9, 0, 0, 0, 0, 1140, 651, 0, 0, 0, 0, 257, 654, 0, 0, 0, 0, 252, -2)
+}
+point_count = 5
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -645.0
+offset_right = 257.0
+grow_vertical = 0
+
+[node name="Joystick" parent="HBoxContainer" instance=ExtResource("1_1mfcc")]
+position = Vector2(117, 529)
+
+[node name="CornMap" type="Area2D" parent="HBoxContainer"]
+position = Vector2(619, 388)
+
+[node name="CornSpawn" type="CollisionShape2D" parent="HBoxContainer/CornMap"]
+position = Vector2(-51.25, -78.5)
+shape = SubResource("RectangleShape2D_enlbq")
+debug_color = Color(0.996078, 0, 0.184314, 0.419608)
+
+[node name="ArrowPath" type="Path2D" parent="HBoxContainer"]
+position = Vector2(9, -7)
+curve = SubResource("Curve2D_m7yyr")
+
+[node name="ArrowSpawn" type="PathFollow2D" parent="HBoxContainer/ArrowPath"]
+position = Vector2(-11, -1)
+rotation = 0.00862791

@@ -6,6 +6,9 @@ extends Node
 var arrowMinSpeed = 150.0
 var arrowMaxSpeed = 250.0
 
+var corn_points = 0
+var time_left = 45
+
 func _ready():
 	#$CornTimer.start()
 	#$ArrowTimer.start()
@@ -17,6 +20,7 @@ func start_game():
 	$HUD/HBoxContainer/Joystick.show()
 	$CornTimer.start()
 	$ArrowTimer.start()
+	$GameTimer.start()
 
 func _on_corn_timer_timeout():
 	$Player.visible = true
@@ -66,3 +70,11 @@ func _on_arrow_timer_timeout():
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(arrow)
+
+func _on_game_timer_timeout():
+	time_left = time_left - 1
+	$HUD/Timer.text = str(time_left)
+	
+func add_points():
+	corn_points = corn_points + 1
+	$HUD/Score.text = str(corn_points)

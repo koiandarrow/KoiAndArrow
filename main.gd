@@ -7,10 +7,16 @@ var arrowMinSpeed = 150.0
 var arrowMaxSpeed = 250.0
 
 func _ready():
-	$CornTimer.start()
-	$ArrowTimer.start()
+	#$CornTimer.start()
+	#$ArrowTimer.start()
 	#$Player.start($StartPosition1.position)
 	print("hey")
+	
+func start_game():
+	$Player.show()
+	$HUD/HBoxContainer/Joystick.show()
+	$CornTimer.start()
+	$ArrowTimer.start()
 
 func _on_corn_timer_timeout():
 	$Player.visible = true

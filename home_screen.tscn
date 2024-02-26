@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://brgfjlhrbthc3"]
+
+[ext_resource type="Script" path="res://home_screen.gd" id="1_6nbs6"]
+
+[node name="HomeScreen" type="CanvasLayer"]
+script = ExtResource("1_6nbs6")
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = -1
+offset_left = 439.0
+offset_top = 387.0
+offset_right = 691.0
+offset_bottom = 496.0
+rotation = 0.00011
+text = "Start"
+
+[node name="Message" type="Label" parent="."]
+offset_left = 468.0
+offset_top = 171.0
+offset_right = 626.0
+offset_bottom = 242.0
+rotation = 0.00105368
+text = "Koi And Arrow"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

@@ -2,6 +2,7 @@ extends CanvasLayer
 
 # Notifies `Main` node that the button has been pressed
 signal start_game
+signal dash
 var cornScore = 0
 var onMainMenu = true
 
@@ -37,6 +38,10 @@ func _on_start_button_pressed():
 	#$CornCounter.show()
 	#$FishCounter.show()
 	start_game.emit()
+	
+func _on_dash_pressed():
+	dash.emit()
+
 #
 #func _on_message_timer_timeout():
 	#$Message.hide()

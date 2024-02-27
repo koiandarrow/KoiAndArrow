@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var joystick = $"../HUD/HBoxContainer/Joystick"
 
 const SPEED = 600.0
+const BOOST_SPEED = 1400.0
 const JUMP_VELOCITY = -400.0
 
 signal corn_point
@@ -11,22 +12,32 @@ signal gold_corn_point
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var isSelected = true
 var leftBlocked = false
+var screen_size
+var is_dashing = false
+var last_direction
 
+func _ready():
+	screen_size = get_viewport_rect().size
 
 func _physics_process(delta):
 	var velocity = Vector2.ZERO
 	var direction = joystick.posVector
-	if direction:
-		velocity = direction * SPEED
+	if (is_dashing):
+		print("dashing")
+		velocity = last_direction * BOOST_SPEED
 		var target = velocity * 10
 		look_at(target)
 	else:
-		velocity = Vector2(0,0)
-	if isSelected:
-		if leftBlocked and velocity.x > 0:
-			velocity.x = 0
-		position += velocity * delta
-		#position = position.clamp(Vector2.ZERO, screen_size)
+		if (direction != Vector2(0,0)):
+			last_direction = direction
+		if direction:
+			velocity = direction * SPEED
+			var target = velocity * 10
+			look_at(target)
+		else:
+			velocity = Vector2(0,0)
+	position += velocity * delta
+	position = position.clamp(Vector2.ZERO, screen_size)
 
 
 func _on_body_entered(body):
@@ -53,3 +64,17 @@ func _on_area_entered(area):
 				print("goldcorn")
 			area.hide()
 			area.queue_free()
+
+func _on_dash():
+	print("dashing")
+	is_dashing = true
+	$BoostTimer.start()
+	#var velocity = Vector2.ZERO
+	#velocity = last_direction * 1800.0
+	#print(last_direction)
+	#position += velocity * 10
+	#position = position.clamp(Vector2.ZERO, screen_size)
+	
+
+func _on_boost_timer_timeout():
+	is_dashing = false

@@ -6,7 +6,6 @@
 script = ExtResource("1_6nbs6")
 
 [node name="StartButton" type="Button" parent="."]
-anchors_preset = -1
 offset_left = 439.0
 offset_top = 387.0
 offset_right = 691.0
@@ -27,4 +26,12 @@ vertical_alignment = 1
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="Dash" type="Button" parent="."]
+offset_left = 922.0
+offset_top = 230.0
+offset_right = 1054.0
+offset_bottom = 300.0
+text = "DASH"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Dash" to="." method="_on_dash_pressed"]

@@ -41,7 +41,7 @@ func _on_corn_timer_timeout():
 	newLoc.y = newy
 	newLoc.x = newx
 	corn.position = newLoc
-	print(corn.position)
+	#print(corn.position)
 	add_child(corn)
 	
 func _on_arrow_timer_timeout():
@@ -57,8 +57,8 @@ func _on_arrow_timer_timeout():
 
 	# Set the mob's position to a random location.
 	arrow.position = arrow_spawn_location.global_position
-	print("mob loc")
-	print(arrow_spawn_location.position)
+	#print("mob loc")
+	#print(arrow_spawn_location.position)
 
 	# Add some randomness to the direction.
 	direction += randf_range(-PI / 4, PI / 4)

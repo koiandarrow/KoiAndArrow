@@ -33,5 +33,13 @@ offset_right = 1054.0
 offset_bottom = 300.0
 text = "DASH"
 
+[node name="Shield" type="Button" parent="."]
+offset_left = 916.0
+offset_top = 364.0
+offset_right = 1061.0
+offset_bottom = 446.0
+text = "SHIELD"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Dash" to="." method="_on_dash_pressed"]
+[connection signal="pressed" from="Shield" to="." method="_on_shield_pressed"]

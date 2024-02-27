@@ -3,6 +3,7 @@ extends CanvasLayer
 # Notifies `Main` node that the button has been pressed
 signal start_game
 signal dash
+signal shield
 var cornScore = 0
 var onMainMenu = true
 
@@ -41,6 +42,9 @@ func _on_start_button_pressed():
 	
 func _on_dash_pressed():
 	dash.emit()
+	
+func _on_shield_pressed():
+	shield.emit()
 
 #
 #func _on_message_timer_timeout():

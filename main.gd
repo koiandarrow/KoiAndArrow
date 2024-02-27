@@ -69,6 +69,7 @@ func _on_arrow_timer_timeout():
 	arrow.linear_velocity = velocity.rotated(direction)
 
 	# Spawn the mob by adding it to the Main scene.
+	arrow.add_to_group("arrow")
 	add_child(arrow)
 
 func _on_game_timer_timeout():

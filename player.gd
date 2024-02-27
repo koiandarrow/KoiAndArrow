@@ -15,6 +15,7 @@ var leftBlocked = false
 var screen_size
 var is_dashing = false
 var last_direction
+var is_shielded = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -44,26 +45,34 @@ func _on_body_entered(body):
 	print("collided")
 	if(body.collision_layer==2):
 		print("collision layer 2")
-		if(body.name!="Player"):
-			print("ate corn")
-			if body.is_in_group("goldcorn"):
-				print("goldcorn")
-				gold_corn_point.emit()
-			else:
-				corn_point.emit()
+		if body.is_in_group("arrow"):
+			print("arrow")
 			body.hide()
 			body.queue_free()
+		else:
+			if(body.name!="Player"):
+				print("ate corn")
+				if body.is_in_group("goldcorn"):
+					print("goldcorn")
+					gold_corn_point.emit()
+				else:
+					corn_point.emit()
+				body.hide()
+				body.queue_free()
 		
 func _on_area_entered(area):
 	print("area")
-	if(area.collision_layer==2):
-		print("collision layer 2")
-		if(area.name!="Player"):
-			print("ate corn")
-			if area.is_in_group("goldcorn"):
-				print("goldcorn")
-			area.hide()
-			area.queue_free()
+	#if(area.collision_layer==2):
+		#print("collision layer 2")
+		#if(area.name!="Player"):
+			#print("ate corn")
+			#if area.is_in_group("goldcorn"):
+				#print("goldcorn")
+				#gold_corn_point.emit()
+			#else:
+				#corn_point.emit()
+			#area.hide()
+			#area.queue_free()
 
 func _on_dash():
 	print("dashing")
@@ -74,6 +83,9 @@ func _on_dash():
 	#print(last_direction)
 	#position += velocity * 10
 	#position = position.clamp(Vector2.ZERO, screen_size)
+
+func _on_shield():
+	print("shield")
 	
 
 func _on_boost_timer_timeout():

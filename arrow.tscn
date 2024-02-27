@@ -17,7 +17,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_alcyi"]
 size = Vector2(66, 6)
 
-[node name="arrow" type="RigidBody2D"]
+[node name="arrow" type="RigidBody2D" groups=["arrow"]]
+collision_layer = 2
+collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_idm18")
 

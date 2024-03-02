@@ -8,6 +8,7 @@ const JUMP_VELOCITY = -400.0
 
 signal corn_point
 signal gold_corn_point
+signal arrow_hit
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var isSelected = true
@@ -22,6 +23,27 @@ func _ready():
 
 func _physics_process(delta):
 	var velocity = Vector2.ZERO
+	
+	# WASD Controls
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1
+		
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * SPEED
+		$AnimatedSprite2D.play()
+	else:
+		$AnimatedSprite2D.stop()
+	
+	position += velocity * delta
+	position = position.clamp(Vector2.ZERO, screen_size)
+	# WASD Controls End
+	
 	var direction = joystick.posVector
 	if (is_dashing):
 		print("dashing")
@@ -49,6 +71,8 @@ func _on_body_entered(body):
 			print("arrow")
 			body.hide()
 			body.queue_free()
+			if !is_shielded:
+				arrow_hit.emit()
 		else:
 			if(body.name!="Player"):
 				print("ate corn")
@@ -86,7 +110,11 @@ func _on_dash():
 
 func _on_shield():
 	print("shield")
+	is_shielded = true
+	$ShieldTimer.start()
 	
-
 func _on_boost_timer_timeout():
 	is_dashing = false
+	
+func _on_shield_timer_timeout():
+	is_shielded = false

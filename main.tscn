@@ -43,9 +43,12 @@ position = Vector2(-395, 232)
 
 [node name="GameTimer" type="Timer" parent="."]
 
+[connection signal="arrow_hit" from="Player" to="." method="lose_points"]
 [connection signal="corn_point" from="Player" to="." method="add_points"]
 [connection signal="timeout" from="CornTimer" to="." method="_on_corn_timer_timeout"]
 [connection signal="timeout" from="ArrowTimer" to="." method="_on_arrow_timer_timeout"]
 [connection signal="dash" from="HomeScreen" to="Player" method="_on_dash"]
+[connection signal="shield" from="HomeScreen" to="." method="_on_shield"]
+[connection signal="shield" from="HomeScreen" to="Player" method="_on_shield"]
 [connection signal="start_game" from="HomeScreen" to="." method="start_game"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]

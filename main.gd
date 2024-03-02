@@ -16,11 +16,17 @@ func _ready():
 	print("hey")
 	
 func start_game():
+	time_left = 45
+	corn_points = 0
 	$Player.show()
 	$HUD/HBoxContainer/Joystick.show()
 	$CornTimer.start()
 	$ArrowTimer.start()
 	$GameTimer.start()
+	$HUD/Score.show()
+	$HUD/Timer.show()
+	$HomeScreen/Dash.show()
+	$HomeScreen/Shield.show()
 
 func _on_corn_timer_timeout():
 	$Player.visible = true
@@ -75,7 +81,23 @@ func _on_arrow_timer_timeout():
 func _on_game_timer_timeout():
 	time_left = time_left - 1
 	$HUD/Timer.text = str(time_left)
+	if time_left < 1:
+		end_game()
+		
+func end_game():
+	$Player.hide()
+	$HUD/HBoxContainer/Joystick.hide()
+	$CornTimer.stop()
+	$ArrowTimer.stop()
+	$GameTimer.stop()
+	$HomeScreen/Dash.hide()
+	$HomeScreen/Shield.hide()
+	$HomeScreen/StartButton.show()
 	
 func add_points():
 	corn_points = corn_points + 1
+	$HUD/Score.text = str(corn_points)
+
+func lose_points():
+	corn_points = corn_points - 5
 	$HUD/Score.text = str(corn_points)

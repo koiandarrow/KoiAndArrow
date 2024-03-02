@@ -27,6 +27,7 @@ vertical_alignment = 1
 wait_time = 5.0
 
 [node name="Dash" type="Button" parent="."]
+visible = false
 offset_left = 922.0
 offset_top = 230.0
 offset_right = 1054.0
@@ -34,6 +35,7 @@ offset_bottom = 300.0
 text = "DASH"
 
 [node name="Shield" type="Button" parent="."]
+visible = false
 offset_left = 916.0
 offset_top = 364.0
 offset_right = 1061.0

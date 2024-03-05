@@ -47,6 +47,9 @@ func _physics_process(delta):
 	var direction = joystick.posVector
 	if (is_dashing):
 		print("dashing")
+		if (last_direction == null):
+			last_direction = Vector2.ZERO
+			last_direction.x = 1;
 		velocity = last_direction * BOOST_SPEED
 		var target = velocity * 10
 		look_at(target)

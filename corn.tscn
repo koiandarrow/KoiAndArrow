@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://sggutdetx6rx"]
 
 [ext_resource type="Script" path="res://corn.gd" id="1_edtkc"]
-[ext_resource type="Texture2D" uid="uid://crvug4t4s71xb" path="res://art/corn.png" id="2_w6q5b"]
+[ext_resource type="Texture2D" uid="uid://c6sy40hfspp5t" path="res://art/corn3.png" id="2_ygo11"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u2axr"]
 radius = 19.2354
@@ -10,7 +10,7 @@ radius = 19.2354
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_w6q5b")
+"texture": ExtResource("2_ygo11")
 }],
 "loop": true,
 "name": &"default",
@@ -30,8 +30,8 @@ visibility_layer = 2
 shape = SubResource("CircleShape2D_u2axr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -1)
-scale = Vector2(0.1875, 0.234568)
+position = Vector2(316, -81)
+scale = Vector2(0.389516, 0.266819)
 sprite_frames = SubResource("SpriteFrames_1wv8w")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

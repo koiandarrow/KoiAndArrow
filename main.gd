@@ -16,7 +16,7 @@ func _ready():
 	print("hey")
 	
 func start_game():
-	time_left = 45
+	time_left = 5
 	corn_points = 0
 	$Player.show()
 	$HUD/HBoxContainer/Joystick.show()
@@ -27,6 +27,7 @@ func start_game():
 	$HUD/Timer.show()
 	$HomeScreen/Dash.show()
 	$HomeScreen/Shield.show()
+	$HUD/Score2.hide()
 
 func _on_corn_timer_timeout():
 	$Player.visible = true
@@ -48,6 +49,7 @@ func _on_corn_timer_timeout():
 	newLoc.x = newx
 	corn.position = newLoc
 	#print(corn.position)
+	corn.add_to_group("corn")
 	add_child(corn)
 	
 func _on_arrow_timer_timeout():
@@ -85,6 +87,8 @@ func _on_game_timer_timeout():
 		end_game()
 		
 func end_game():
+	get_tree().call_group("arrow", "queue_free")
+	get_tree().call_group("corn", "queue_free")
 	$Player.hide()
 	$HUD/HBoxContainer/Joystick.hide()
 	$CornTimer.stop()
@@ -92,7 +96,11 @@ func end_game():
 	$GameTimer.stop()
 	$HomeScreen/Dash.hide()
 	$HomeScreen/Shield.hide()
+	$HomeScreen/StartButton.text = "Play Again"
 	$HomeScreen/StartButton.show()
+	$HUD/Score.hide()
+	$HUD/Score2.text = str(corn_points)
+	$HUD/Score2.show()
 	
 func add_points():
 	corn_points = corn_points + 1

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://mjrx1vwqi6jh"]
+[gd_scene load_steps=8 format=3 uid="uid://mjrx1vwqi6jh"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_2g4yv"]
+[ext_resource type="Texture2D" uid="uid://bjxybpwvdydg1" path="res://art/shield.png" id="3_hirmw"]
 [ext_resource type="Texture2D" uid="uid://c04vexu73nx1l" path="res://art/koi2.png" id="3_uprjm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3o4wi"]
@@ -11,6 +12,17 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_uprjm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w5aml"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hirmw")
 }],
 "loop": true,
 "name": &"default",
@@ -43,6 +55,13 @@ rotation = -4.7144
 scale = Vector2(0.193537, 0.204082)
 sprite_frames = SubResource("SpriteFrames_ew87w")
 
+[node name="Shield" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(27, 102)
+rotation = -6.2832
+scale = Vector2(0.0666857, 0.0729452)
+sprite_frames = SubResource("SpriteFrames_w5aml")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 2
 visibility_layer = 2
@@ -57,8 +76,11 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
+[node name="AbilityTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_shield_timer_timeout"]
+[connection signal="timeout" from="AbilityTimer" to="." method="_on_ability_timer_timeout"]

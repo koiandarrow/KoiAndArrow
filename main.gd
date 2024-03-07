@@ -7,26 +7,29 @@ var arrowMinSpeed = 150.0
 var arrowMaxSpeed = 250.0
 
 var corn_points = 0
-var time_left = 45
+var time_left = 30
 
 func _ready():
 	#$CornTimer.start()
 	#$ArrowTimer.start()
 	#$Player.start($StartPosition1.position)
-	print("hey")
+	var isReady = true
 	
 func start_game():
-	time_left = 5
+	$Background.play()
+	time_left = 30
 	corn_points = 0
 	$Player.show()
-	$HUD/HBoxContainer/Joystick.show()
+	#$HUD/HBoxContainer/Joystick.show()
 	$CornTimer.start()
 	$ArrowTimer.start()
 	$GameTimer.start()
 	$HUD/Score.show()
+	$HUD/Score.text = str(0)
 	$HUD/Timer.show()
-	$HomeScreen/Dash.show()
-	$HomeScreen/Shield.show()
+	$HUD/Timer.text = "Start"
+	#$HomeScreen/Dash.show()
+	#$HomeScreen/Shield.show()
 	$HUD/Score2.hide()
 
 func _on_corn_timer_timeout():
@@ -87,6 +90,7 @@ func _on_game_timer_timeout():
 		end_game()
 		
 func end_game():
+	$HUD/Timer.text = 'Game Over'
 	get_tree().call_group("arrow", "queue_free")
 	get_tree().call_group("corn", "queue_free")
 	$Player.hide()

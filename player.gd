@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var joystick = $"../HUD/HBoxContainer/Joystick"
+@onready var ability_timer = $"../HUD/AbilityTimer"
 
 const SPEED = 600.0
 const BOOST_SPEED = 1400.0
@@ -17,12 +18,20 @@ var screen_size
 var is_dashing = false
 var last_direction
 var is_shielded = false
+var ability_cooldown = false
+var time_left = 3
 
 func _ready():
 	screen_size = get_viewport_rect().size
 
 func _physics_process(delta):
 	var velocity = Vector2.ZERO
+	
+	if !ability_cooldown:
+		if Input.is_action_pressed("dash"):
+			_on_dash()
+		if Input.is_action_pressed("shield"):
+			_on_shield()
 	
 	# WASD Controls
 	if Input.is_action_pressed("move_right"):
@@ -33,9 +42,14 @@ func _physics_process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
-		
+	
+	if (velocity != Vector2(0,0)):
+			last_direction = velocity
+			
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * SPEED
+		var target1 = velocity * 10
+		look_at(target1)
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
@@ -102,9 +116,12 @@ func _on_area_entered(area):
 			#area.queue_free()
 
 func _on_dash():
+	ability_timer.show()
 	print("dashing")
 	is_dashing = true
 	$BoostTimer.start()
+	ability_cooldown = true
+	$AbilityTimer.start()
 	#var velocity = Vector2.ZERO
 	#velocity = last_direction * 1800.0
 	#print(last_direction)
@@ -112,12 +129,28 @@ func _on_dash():
 	#position = position.clamp(Vector2.ZERO, screen_size)
 
 func _on_shield():
+	ability_timer.show()
 	print("shield")
 	is_shielded = true
+	$Shield.show()
 	$ShieldTimer.start()
+	ability_cooldown = true
+	$AbilityTimer.start()
+	
 	
 func _on_boost_timer_timeout():
 	is_dashing = false
 	
 func _on_shield_timer_timeout():
 	is_shielded = false
+	$Shield.hide()
+	
+func _on_ability_timer_timeout():
+	print("TIMEOUT")
+	time_left = time_left - 1
+	ability_timer.text = str(time_left)
+	if time_left < 1:
+		time_left = 3
+		$AbilityTimer.stop()
+		ability_timer.hide()
+		ability_cooldown = false

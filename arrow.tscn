@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://bcjvhyokx8wbp"]
 
 [ext_resource type="Script" path="res://arrow.gd" id="1_idm18"]
-[ext_resource type="Texture2D" uid="uid://bktf2kqv6pv1d" path="res://art/arrow.png" id="2_padqs"]
+[ext_resource type="Texture2D" uid="uid://churr1cd0ig0q" path="res://art/arrow2.png" id="2_msbhf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jyrl8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_padqs")
+"texture": ExtResource("2_msbhf")
 }],
 "loop": true,
 "name": &"default",
@@ -17,13 +17,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_alcyi"]
 size = Vector2(66, 6)
 
-[node name="arrow" type="RigidBody2D"]
+[node name="arrow" type="RigidBody2D" groups=["arrow"]]
+collision_layer = 2
+collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_idm18")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(3, 0)
-scale = Vector2(0.0580286, 0.0645161)
+position = Vector2(55, 37)
+scale = Vector2(0.155627, 0.205613)
 sprite_frames = SubResource("SpriteFrames_jyrl8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

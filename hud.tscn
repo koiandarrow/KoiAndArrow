@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://ct4yk73x8n57t"]
+[gd_scene load_steps=5 format=3 uid="uid://ct4yk73x8n57t"]
 
 [ext_resource type="PackedScene" uid="uid://d2ijveyjel7ig" path="res://joystick.tscn" id="1_1mfcc"]
+[ext_resource type="FontFile" uid="uid://bw7uxmmpcwkj" path="res://fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Bold.ttf" id="2_aby6t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enlbq"]
 size = Vector2(1073.5, 579)
 
 [sub_resource type="Curve2D" id="Curve2D_m7yyr"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -11, -1, 0, 0, 0, 0, 1148, 9, 0, 0, 0, 0, 1140, 651, 0, 0, 0, 0, 257, 654, 0, 0, 0, 0, 252, -2)
+"points": PackedVector2Array(0, 0, 0, 0, -11, -1, 0, 0, 0, 0, 1148, 9, 0, 0, 0, 0, 1140, 651, 0, 0, 0, 0, -8, 657, 0, 0, 0, 0, -4, 2)
 }
 point_count = 5
 
@@ -22,6 +23,7 @@ offset_right = 257.0
 grow_vertical = 0
 
 [node name="Joystick" parent="HBoxContainer" instance=ExtResource("1_1mfcc")]
+visible = false
 position = Vector2(117, 529)
 
 [node name="CornMap" type="Area2D" parent="HBoxContainer"]
@@ -39,3 +41,74 @@ curve = SubResource("Curve2D_m7yyr")
 [node name="ArrowSpawn" type="PathFollow2D" parent="HBoxContainer/ArrowPath"]
 position = Vector2(-11, -1)
 rotation = 0.00862791
+
+[node name="Score" type="Label" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = 100.0
+offset_right = -85.0
+offset_bottom = 182.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("2_aby6t")
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AbilityTimer" type="Label" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = 200.0
+offset_right = -85.0
+offset_bottom = 282.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("2_aby6t")
+theme_override_font_sizes/font_size = 30
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score2" type="Label" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -702.0
+offset_top = 164.0
+offset_right = -449.0
+offset_bottom = 273.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("2_aby6t")
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Label" parent="."]
+visible = false
+offset_left = 450.0
+offset_top = 41.0
+offset_right = 702.0
+offset_bottom = 150.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_aby6t")
+theme_override_font_sizes/font_size = 30
+text = "45"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0n2ywysiy68s"]
+[gd_scene load_steps=7 format=3 uid="uid://d0n2ywysiy68s"]
 
 [ext_resource type="PackedScene" uid="uid://ct4yk73x8n57t" path="res://hud.tscn" id="1_ipfg8"]
 [ext_resource type="Script" path="res://main.gd" id="1_t7rx1"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://mjrx1vwqi6jh" path="res://player.tscn" id="4_ik8wa"]
 [ext_resource type="PackedScene" uid="uid://bcjvhyokx8wbp" path="res://arrow.tscn" id="5_vssdo"]
 [ext_resource type="PackedScene" uid="uid://brgfjlhrbthc3" path="res://home_screen.tscn" id="6_d0c1t"]
-[ext_resource type="AudioStream" uid="uid://ugyx0wq6ko27" path="res://sounds/Evening Mood.ogg" id="7_wh5o5"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_t7rx1")
@@ -44,15 +43,9 @@ position = Vector2(-395, 232)
 
 [node name="GameTimer" type="Timer" parent="."]
 
-[node name="Background" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_wh5o5")
-
-[connection signal="arrow_hit" from="Player" to="." method="lose_points"]
 [connection signal="corn_point" from="Player" to="." method="add_points"]
 [connection signal="timeout" from="CornTimer" to="." method="_on_corn_timer_timeout"]
 [connection signal="timeout" from="ArrowTimer" to="." method="_on_arrow_timer_timeout"]
 [connection signal="dash" from="HomeScreen" to="Player" method="_on_dash"]
-[connection signal="shield" from="HomeScreen" to="." method="_on_shield"]
-[connection signal="shield" from="HomeScreen" to="Player" method="_on_shield"]
 [connection signal="start_game" from="HomeScreen" to="." method="start_game"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]

@@ -9,5 +9,7 @@ You have 30 seconds to collect as much corn as you can before they disappear. Ge
 ## Controls
 
 Move: WASD
+
 Dash: J
+
 Shield: K
